@@ -1,3 +1,6 @@
 
 1	aman	saving	600.0
 1	jj	saving	600.0
+1	amanjot	saving	1000.0
+1	amanjot kaur	savings	1000.0
+2	lovepreet kaur	current	1000.0

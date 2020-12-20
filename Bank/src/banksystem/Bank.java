@@ -91,6 +91,26 @@ class Bankpro {
 		}
 	}
 
+	
+	public void update() {
+		Scanner sc = new Scanner(System.in);
+		Scanner sc1 = new Scanner(System.in);
+		String str;
+		int account = 0;
+		boolean flag = true;
+		System.out.println("\nAccount Information Updation");
+		System.out.print("Enter the account number: ");
+		account = sc.nextInt();
+		System.out.print("Enter name for updation  ");
+		str = sc1.nextLine();
+			name[account]=str;
+			System.out.println("\nAccount No. : " + accno[account]);
+			System.out.println("Name : " + name[account]);
+			System.out.println("Account Type : " + acctype[account]);
+			System.out.println("Balance Amount : " + balance[account] + "\n");
+		}
+	
+	
 	public void deposit() {
 		Scanner sc = new Scanner(System.in);
 		String str;
@@ -147,6 +167,73 @@ class Bankpro {
 		}
 
 	}
+	
+	
+	public void paybill() {
+		Scanner sc = new Scanner(System.in);
+		String str;
+		double amount, checkamount;
+		int account;
+		boolean flag = true;
+		System.out.println("\nBill Payment\n");
+		System.out.print("Enter the account number  : ");
+		account = sc.nextInt();
+		if (account < counter || account > totalacc) {
+			System.out.println("\nAccount No. not exists \n");
+			flag = false;
+		}
+
+		if (flag == true) {
+			System.out.println("Balance is : " + balance[account]);
+			System.out.print("Enter Amount for Bill Payment to Company  : ");
+			amount = sc.nextDouble();
+			checkamount = balance[account] - amount;
+			if (checkamount >= minbal) {
+				balance[account] = checkamount;
+				System.out.println("Account Number :  " + account);
+				System.out.println("Balance Amount :  " + balance[account] + "\n");
+			} else {
+				System.out.println("\nLow balance\n");
+			}
+		}
+
+	}
+	public void transfer() {
+		Scanner sc = new Scanner(System.in);
+		Scanner sc1 = new Scanner(System.in);
+		String str;
+		double amount, checkamount,checkamount1;
+		int account,account1;
+		boolean flag = true;
+		System.out.println("\nTransfer Amount\n");
+		System.out.print("Enter the account number from which money transfer : ");
+		account = sc.nextInt();
+		System.out.print("Enter the account number where money transfer : ");
+		account1 = sc.nextInt();
+		if (account < counter || account > totalacc) {
+			System.out.println("\nAccount No. not exists \n");
+			flag = false;
+		}
+
+		if (flag == true) {
+			System.out.println("Balance is : " + balance[account]);
+			System.out.print("Enter Amount for withdraw  : ");
+			amount = sc.nextDouble();
+			checkamount = balance[account] - amount;
+			checkamount1 = balance[account1] + amount;
+			if (checkamount >= minbal) {
+				balance[account] = checkamount;
+				balance[account1] = checkamount1;
+				System.out.println("Account Number :  " + account);
+				System.out.println("Balance Amount :  " + balance[account] + "\n");
+			} else {
+				System.out.println("\nLow balance\n");
+			}
+		}
+
+	}
+	
+	
 }
 
 class Bank {
@@ -161,10 +248,12 @@ class Bank {
 			System.out.println("Press 2 for Display Record");
 			System.out.println("Press 3 for Deposit");
 			System.out.println("Press 4 for Withdraw");
-			System.out.println("Press 5 for Exit");
+			System.out.println("Press 5 for Updation");
+			System.out.println("Press 6 for Transfer Money");
+			System.out.println("Press 7 for Bill Payment");
+			System.out.println("Press 8 for Exit");
 			System.out.print("Enter choice :  ");
 			
-
 			Scanner sc = new Scanner(System.in);
 
 			choice = sc.nextInt();
@@ -181,8 +270,17 @@ class Bank {
 			case 4:
 				obj.withdraw();
 				break;
+			case 5:
+				obj.update(); 
+				break;
+			case 6:
+				obj.transfer();
+				break;
+			case 7:
+				obj.paybill();
+				break;
 			}
 
-		} while (choice != 5);
+		} while (choice != 8);
 	}
 }
